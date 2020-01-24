@@ -1,9 +1,10 @@
+/* eslint-disable no-path-concat */
 const path = require('path');
 
 module.exports = {
   publicPath: '.',
-  outputDir: path.resolve(__dirname, '/public/'),
-  indexPath: path.resolve(__dirname, '/resources/views/index.blade.php'),
+  outputDir: __dirname + '/public/',
+  indexPath: __dirname + '/resources/views/index.blade.php',
   configureWebpack: {
     entry: ['./vue/src/main.ts'],
     resolve: {
@@ -11,10 +12,5 @@ module.exports = {
         '@': path.join(__dirname, 'vue/src/'),
       },
     },
-  },
-  pwa: {
-    workboxOptions: {
-      skipWaiting: true,
-    },
-  },
+  }
 };
