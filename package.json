@@ -7,7 +7,8 @@
         "build": "sh ./scripts/build-frontend.sh",
         "prod": "sh ./scripts/build-frontend.sh --production",
         "test:unit": "node_modules/.bin/vue-cli-service test:unit",
-        "lint": "node_modules/.bin/vue-cli-service lint"
+        "lint": "node_modules/.bin/vue-cli-service lint",
+        "storybook": "start-storybook vue/.storybook/main.js"
     },
     "dependencies": {
         "@types/lodash": "^4.14.149",
@@ -25,6 +26,8 @@
         "vuex-module-decorators": "^0.11.0"
     },
     "devDependencies": {
+        "@babel/core": "^7.8.3",
+        "@storybook/vue": "^5.3.9",
         "@types/jest": "^24.0.19",
         "@vue/cli-plugin-babel": "^4.1.0",
         "@vue/cli-plugin-eslint": "^4.1.0",
@@ -37,6 +40,8 @@
         "@vue/eslint-config-standard": "^5.1.0",
         "@vue/eslint-config-typescript": "^4.0.0",
         "@vue/test-utils": "1.0.0-beta.29",
+        "babel-loader": "^8.0.6",
+        "babel-preset-vue": "^2.0.2",
         "eslint": "^5.16.0",
         "eslint-plugin-node": "^11.0.0",
         "eslint-plugin-prettier": "^3.1.2",
