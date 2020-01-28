@@ -3,6 +3,7 @@ version: "3.2"
 volumes:
   boilerplate_pgsql-data:
   boilerplate_redis-data:
+  ssl-data:
 
 services:
 
@@ -50,15 +51,19 @@ services:
       - 5432:5432
 
   nginx:
-    image: nginx:alpine
+    build:
+      dockerfile: docker/nginx/Dockerfile
+      context: ./
     container_name: boilerplate_nginx
     working_dir: /app
     restart: on-failure
     volumes:
+      - ssl-data:/certs
       - ./:/app:cached
-      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 8000:80
+      - 8001:443
 
   redis:
     image: redis:${REDIS_VERSION:-5.0.5}-alpine

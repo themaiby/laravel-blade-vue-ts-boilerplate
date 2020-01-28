@@ -5,7 +5,7 @@ Completely ready to work boilerplate.
 ### Features includes:
 * ESLint + Airbnb config
 * Enabled hot-reloading mode with `yarn server`
-* On `yarn build` webpack replace default laravel view (*index.blade.php*) by injected and configured HTML with js bundle
+* On `yarn build` webpack replace default laravel view (*index.blade.php*) by injecting and configuring project bundle into blade file.
 * Created simple project structure
 * Configured Vuex & Vue-router
 
