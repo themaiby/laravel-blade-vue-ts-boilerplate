@@ -7,7 +7,9 @@
         "build": "sh ./scripts/build-frontend.sh",
         "prod": "sh ./scripts/build-frontend.sh --production",
         "test:unit": "node_modules/.bin/vue-cli-service test:unit",
-        "lint": "node_modules/.bin/vue-cli-service lint"
+        "lint": "node_modules/.bin/vue-cli-service lint vue/src",
+        "docs": "vue-styleguidist server",
+        "docs:build": "vue-styleguidist build"
     },
     "dependencies": {
         "@types/lodash": "^4.14.149",
@@ -25,6 +27,7 @@
         "vuex-module-decorators": "^0.11.0"
     },
     "devDependencies": {
+        "@babel/core": "^7.8.3",
         "@types/jest": "^24.0.19",
         "@vue/cli-plugin-babel": "^4.1.0",
         "@vue/cli-plugin-eslint": "^4.1.0",
@@ -37,14 +40,19 @@
         "@vue/eslint-config-standard": "^5.1.0",
         "@vue/eslint-config-typescript": "^4.0.0",
         "@vue/test-utils": "1.0.0-beta.29",
+        "babel-loader": "^8.0.6",
+        "babel-preset-vue": "^2.0.2",
         "eslint": "^5.16.0",
         "eslint-plugin-node": "^11.0.0",
         "eslint-plugin-prettier": "^3.1.2",
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-vue": "^5.0.0",
+        "husky": "^4.2.1",
+        "jira-prepare-commit-msg": "^1.1.2",
         "node-sass": "^4.12.0",
         "sass-loader": "^8.0.0",
         "typescript": "~3.5.3",
+        "vue-styleguidist": "^4.7.6",
         "vue-template-compiler": "^2.6.10"
     },
     "eslintConfig": {
@@ -64,8 +72,8 @@
         "overrides": [
             {
                 "files": [
-                    "vue/**/__tests__/*.{j,t}s?(x)",
-                    "vue/**/tests/unit/**/*.spec.{j,t}s?(x)"
+                    "vue/src/**/*.{j,t}s?(x)",
+                    "vue/src/**/*.spec.{j,t}s?(x)"
                 ],
                 "env": {
                     "jest": true
@@ -78,6 +86,18 @@
         "last 2 versions"
     ],
     "jest": {
-        "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"
+        "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel",
+        "testMatch": [
+            "<rootDir>/vue/src/**/*.spec.ts"
+        ],
+        "moduleNameMapper": {
+            "^@/(.*)$": "<rootDir>/vue/src/$1"
+        }
+    },
+    "husky": {
+        "hooks": {
+            "prepare-commit-msg": "jira-prepare-commit-msg",
+            "pre-push": "./scripts/enforce-gitflow.sh && yarn test:unit && yarn lint"
+        }
     }
 }

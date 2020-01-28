@@ -27,3 +27,4 @@ RUN apk update \
     && mv composer.phar /usr/local/bin/composer \
     && composer global require hirak/prestissimo \
     && rm -rf /var/cache/apk/*
+    && chown -R www-data:www-data /app

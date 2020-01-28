@@ -10,8 +10,6 @@ export class UserService {
    * @returns {Promise<IUser>}
    */
   public static get(id: number): Promise<IUser> {
-    return api
-      .get(apiRoutes.users.get(id))
-      .then(unwrap);
+    return api.get(apiRoutes.users.get(id)).then(unwrap);
   }
 }
