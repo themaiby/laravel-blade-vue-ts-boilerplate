@@ -95,8 +95,8 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "sh ./scripts/enforce-gitflow.sh && yarn test:unit && yarn lint",
-            "pre-push": "yarn test:unit && yarn lint"
+            "prepare-commit-msg": "./scripts/commit-msg.sh",
+            "pre-push": "./scripts/enforce-gitflow.sh && yarn test:unit && yarn lint"
         }
     }
 }
