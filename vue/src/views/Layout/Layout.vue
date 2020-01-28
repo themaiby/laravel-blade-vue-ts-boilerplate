@@ -9,4 +9,4 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class Layout extends Vue {}
 </script>
 
-<style lang="scss" src="style.scss"></style>
+<style lang="scss" src="./style.scss"></style>

@@ -7,8 +7,9 @@
         "build": "sh ./scripts/build-frontend.sh",
         "prod": "sh ./scripts/build-frontend.sh --production",
         "test:unit": "node_modules/.bin/vue-cli-service test:unit",
-        "lint": "node_modules/.bin/vue-cli-service lint",
-        "storybook": "start-storybook vue/.storybook/main.js"
+        "lint": "node_modules/.bin/vue-cli-service lint vue/src",
+        "docs": "vue-styleguidist server",
+        "docs:build": "vue-styleguidist build"
     },
     "dependencies": {
         "@types/lodash": "^4.14.149",
@@ -27,7 +28,6 @@
     },
     "devDependencies": {
         "@babel/core": "^7.8.3",
-        "@storybook/vue": "^5.3.9",
         "@types/jest": "^24.0.19",
         "@vue/cli-plugin-babel": "^4.1.0",
         "@vue/cli-plugin-eslint": "^4.1.0",
@@ -47,9 +47,11 @@
         "eslint-plugin-prettier": "^3.1.2",
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-vue": "^5.0.0",
+        "husky": "^4.2.1",
         "node-sass": "^4.12.0",
         "sass-loader": "^8.0.0",
         "typescript": "~3.5.3",
+        "vue-styleguidist": "^4.7.6",
         "vue-template-compiler": "^2.6.10"
     },
     "eslintConfig": {
@@ -69,8 +71,8 @@
         "overrides": [
             {
                 "files": [
-                    "vue/**/__tests__/*.{j,t}s?(x)",
-                    "vue/**/tests/unit/**/*.spec.{j,t}s?(x)"
+                    "vue/src/**/*.{j,t}s?(x)",
+                    "vue/src/**/*.spec.{j,t}s?(x)"
                 ],
                 "env": {
                     "jest": true
@@ -83,6 +85,18 @@
         "last 2 versions"
     ],
     "jest": {
-        "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"
+        "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel",
+        "testMatch": [
+            "<rootDir>/vue/src/**/*.spec.ts"
+        ],
+        "moduleNameMapper": {
+            "^@/(.*)$": "<rootDir>/vue/src/$1"
+        }
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "sh ./scripts/enforce-gitflow.sh && yarn test:unit && yarn lint",
+            "pre-push": "yarn test:unit && yarn lint"
+        }
     }
 }

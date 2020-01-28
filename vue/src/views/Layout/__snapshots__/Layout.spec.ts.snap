@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Example should show render snapshot 1`] = `<span>I'm an layout</span>`;
