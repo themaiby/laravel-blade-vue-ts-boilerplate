@@ -8,6 +8,7 @@ Completely ready to work boilerplate.
 * On `yarn build` webpack replace default laravel view (*index.blade.php*) by injecting and configuring project bundle into blade file.
 * Created simple project structure
 * Configured Vuex & Vue-router
+* Auto-prepend JIRA task ID if branch include it
 
 ### Additional packages included
 * [Axios](https://github.com/axios/axios) - http client
